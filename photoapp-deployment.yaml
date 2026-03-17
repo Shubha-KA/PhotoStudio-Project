@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: photostudio-deployment 
+spec:
+  replicas: 2
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  selector:
+    matchLabels:
+      app: photostudio
+  template:
+    metadata:
+      labels:
+        app: photostudio
+    spec:
+      containers:
+        - name: photostudio-container
+          image: shubha20/photostudio:v1.0.0 
+          ports:
+            - containerPort: 3000
+          envFrom:
+            configMapRef:
+              name: photostudio-config
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: photostudio-service
+spec: 
+  selector:
+    app: photostudio
+  ports:
+    - port: 3000
+      targetPort: 3000
+      protocol: TCP
+  type: NodePort
