@@ -23,8 +23,8 @@ spec:
           ports:
             - containerPort: 3000
           envFrom:
-            configMapRef:
-              name: photostudio-config
+            - configMapRef:
+                name: photostudio-config
 
 ---
 apiVersion: v1
