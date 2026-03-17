@@ -9,7 +9,8 @@ spec:
       app: mongodb
   template:
     metadata:
-      app: mongodb
+      labels:
+        app: mongodb
     spec:
       containers:
         - name: mongodb
