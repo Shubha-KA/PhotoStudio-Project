@@ -8,4 +8,4 @@ spec:
     app: haproxy
   ports:
   - port: 80
-    targetPort: 80
+    targetPort: 8080
